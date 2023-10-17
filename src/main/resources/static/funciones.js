@@ -23,7 +23,7 @@ function eliminar(id,name,apellido) {
 				});
 			} else {
 				swal("¡Tu registro está a salvo!", {
-					icon: "success",
+					icon: "info",
 				});
 			}
 		});

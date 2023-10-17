@@ -13,21 +13,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.interfaceService.IloginService;
 import com.example.demo.interfaceService.IpersonaService;
 import com.example.demo.modelo.Persona;
+import com.example.demo.modelo.Login;
 
 @Controller
 @RequestMapping
 public class Controlador {
 	
 	@Autowired
-	private IpersonaService service;
+	private IpersonaService servicePersona;
+	private IloginService servicelogin;
 	
 	@GetMapping("/listar")
 	public String listar(Model model) {
-		List<Persona>personas=service.listar();
+		List<Persona>personas=servicePersona.listar();
 		model.addAttribute("personas", personas);
 		return "index";
+	}
+	
+	
+	@GetMapping("/listarUsuarios")
+	public String listarUsuarios(Model model) {
+		List<Login>usuarios=servicelogin.listar();
+		model.addAttribute("usuarios", usuarios);
+		return "index2";
 	}
 	
 	@GetMapping("/new")
@@ -39,20 +50,20 @@ public class Controlador {
 	@PostMapping("/save")
 	public String save(@Validated Persona p, Model model) {
 		model.addAttribute("personas", new Persona());
-		service.save(p);
+		servicePersona.save(p);
 		return "redirect:/listar";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable int id, Model model){
-		Optional<Persona>persona=service.listarId(id);
+		Optional<Persona>persona=servicePersona.listarId(id);
 		model.addAttribute("persona", persona);
 		return "form";
 	}
 	
 	@GetMapping("/eliminar/{id}")
 	public String delete(Model model, @PathVariable int id){
-		service.delete(id);
+		servicePersona.delete(id);
 		return "redirect:/listar";
 	}
 	

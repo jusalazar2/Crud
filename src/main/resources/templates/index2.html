@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container mt-4">
-		<a th:href="@{/new}" class="btn btn-primary">Agregar</a>
+		<a th:href="@{/newlogin}" class="btn btn-primary">Agregar</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -27,12 +27,11 @@
 					<td th:text="${login.id}"></td>
 					<td th:text="${login.usuario}"></td>
 					<td th:text="${login.correo}"></td>
-					<td th:text="${login.contraseña}"></td>
+					<td th:text="${login.contrasena}"></td>
 					<td th:text="${login.rool}"></td>
 					<td>
-					<a class="btn btn-warning">Editar</a> 
-					<a class="btn btn-danger">Eliminar</a>
-					
+					<a th:href="@{/editarLogin/}+${login.id}" class="btn btn-warning">Editar</a>
+					<a th:onclick="eliminarr([[${login.id}]],[[${login.usuario}]])" class="btn btn-danger">Eliminar</a>
 					</td>
 				</tr>
 			</tbody>
@@ -52,7 +51,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="funciones.js"></script>
+	<script src="funciones2.js"></script>
 	
 </body>
 </html>

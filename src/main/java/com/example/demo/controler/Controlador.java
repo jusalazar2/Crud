@@ -24,6 +24,8 @@ public class Controlador {
 	
 	@Autowired
 	private IpersonaService servicePersona;
+	
+	@Autowired
 	private IloginService servicelogin;
 	
 	@GetMapping("/listar")
@@ -47,11 +49,24 @@ public class Controlador {
 		return "form";
 	}
 	
+	@GetMapping("/newlogin")
+	public String agregarlogin(Model model) {
+		model.addAttribute("login", new Login());
+		return "registrar";
+	}
+	
 	@PostMapping("/save")
 	public String save(@Validated Persona p, Model model) {
 		model.addAttribute("personas", new Persona());
 		servicePersona.save(p);
 		return "redirect:/listar";
+	}
+	
+	@PostMapping("/savelogin")
+	public String saveLogin(@Validated Login r, Model model) {
+		model.addAttribute("login", new Login());
+		servicelogin.save(r);
+		return "redirect:/listarUsuarios";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -61,10 +76,24 @@ public class Controlador {
 		return "form";
 	}
 	
+	
+	@GetMapping("/editarLogin/{id}")
+	public String editarLogin(@PathVariable int id, Model model){
+		Optional<Login>empleado=servicelogin.listarId(id);
+		model.addAttribute("login", empleado);
+		return "registrar";
+	}
+	
 	@GetMapping("/eliminar/{id}")
 	public String delete(Model model, @PathVariable int id){
 		servicePersona.delete(id);
 		return "redirect:/listar";
+	}
+	
+	@GetMapping("/eliminarLogin/{id}")
+	public String deletelogin(Model model, @PathVariable int id){
+		servicelogin.delete(id);
+		return "redirect:/listarUsuarios";
 	}
 	
 

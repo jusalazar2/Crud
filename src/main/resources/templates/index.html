@@ -27,8 +27,8 @@
 					<td th:text="${persona.apellido}"></td>
 					<td>
 					<a th:href="@{/editar/}+${persona.id}" class="btn btn-warning">Editar</a> 
-					<a th:href="@{/eliminar/}+${persona.id}" class="btn btn-danger">Eliminar</a>
-					<a th:onclick="eliminar([[${persona.id}]],[[${persona.name}]],[[${persona.apellido}]])" class="btn btn-danger">Eliminar2</a>
+					<!-- <a th:href="@{/eliminar/}+${persona.id}" class="btn btn-danger">Eliminar</a> –-->
+					<a th:onclick="eliminar([[${persona.id}]],[[${persona.name}]],[[${persona.apellido}]])" class="btn btn-danger">Eliminar</a>
 					</td>
 				</tr>
 			</tbody>
